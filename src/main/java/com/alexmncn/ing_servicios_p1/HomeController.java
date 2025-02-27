@@ -1,22 +1,28 @@
 package com.alexmncn.ing_servicios_p1;
 
-import com.alexmncn.ing_servicios_p1.data.User;
+import com.alexmncn.ing_servicios_p1.daos.UserDAOInterface;
+import com.alexmncn.ing_servicios_p1.dtos.UserDTO;
+import com.alexmncn.ing_servicios_p1.dtos.User_;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.juli.logging.Log;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.beans.JavaBean;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.Objects;
 
 @Controller
 public class HomeController {
+    @Autowired
+    private UserDAOInterface userDAO;
+
+
     @GetMapping(value = "/")
     public String homeV(){
         return "home";
@@ -38,7 +44,7 @@ public class HomeController {
             @RequestParam("last_name") String last_name
     ) {
         // New session
-        User user = new User(username, email, name, last_name); // New user object
+        User_ user = new User_(username, email, name, last_name); // New user object
         HttpSession session = req.getSession(); // Get or create new session
         session.setAttribute("user", user); // Save user data in session
 
@@ -62,7 +68,7 @@ public class HomeController {
 
         // Check if session exists
         if (session != null) {
-            User user = (User) session.getAttribute("user");
+            User_ user = (User_) session.getAttribute("user");
 
             // Add param. values to model
             model.addAttribute("username", user.getUsername());
@@ -86,5 +92,82 @@ public class HomeController {
         System.out.println(cookieName +": " + cookieValue);
 
         return "user";
+    }
+
+    @GetMapping(value = "/login")
+    public String loginVG() {
+        return "login";
+    }
+
+    @PostMapping(value = "/login")
+    public String loginVP(
+            Model model,
+            HttpServletRequest req,
+            @RequestParam("username") String username,
+            @RequestParam("password") String password
+    ) {
+        boolean loginStatus = false;
+        UserDTO user = new UserDTO(username, password);
+
+        // Check user credentials
+        loginStatus = userDAO.loginUser(user);
+
+        if (loginStatus) {
+            // Create session
+            HttpSession session = req.getSession(); // Get or create new session
+            session.setAttribute("username", user.getUsername()); // Save username in session
+
+            // If admin user return admin panel view
+            if (username.equals("admin")) {
+                ArrayList<UserDTO> users = userDAO.getUsers(); // Get all users
+
+                model.addAttribute("users", users); // Add users to model
+                return "adminpanel";
+            }
+
+            model.addAttribute("username", user.getUsername());
+            return "articles";
+        } else {
+            model.addAttribute("e_message", "Usuario no registrado");
+            return "login";
+        }
+    }
+
+    @GetMapping(value = "/logout")
+    public String logoutVG(
+            Model model,
+            HttpServletRequest req
+    ) {
+        // Get session if exists
+        HttpSession session = req.getSession(false);
+
+        if (session != null) {
+            session.invalidate(); // Delete session
+            model.addAttribute("e_message", "Has cerrado sesión.");
+        } else {
+            model.addAttribute("e_message", "No había una sesión activa.");
+        }
+
+        return "login";
+    }
+
+    @GetMapping(value = "/articles")
+    public String articlesVG(
+            Model model,
+            HttpServletRequest req
+    ) {
+        String username;
+        // Get session if exists
+        HttpSession session = req.getSession(false);
+
+        if (session != null) {
+            username = session.getAttribute("username").toString();
+
+            model.addAttribute("username", username);
+            return "articles";
+        } else {
+            model.addAttribute("e_message", "Debes iniciar sesión para ver los artículos");
+            return "login";
+        }
     }
 }

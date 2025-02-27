@@ -1,18 +1,18 @@
-package com.alexmncn.ing_servicios_p1.data;
+package com.alexmncn.ing_servicios_p1.dtos;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class User_ implements Serializable {
     private String username;
     private String email;
     private String name;
     private String lastName;
 
-    public User() {
+    public User_() {
         // No Args
     }
 
-    public User(String username, String email, String name, String lastName) {
+    public User_(String username, String email, String name, String lastName) {
         this.username = username;
         this.email = email;
         this.name = name;

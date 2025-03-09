@@ -1,18 +1,23 @@
 package com.alexmncn.ing_servicios_p1.daos;
 
 import com.alexmncn.ing_servicios_p1.dtos.UserDTO;
-import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
-@Repository
+
 public class UserDAOTest implements UserDAOInterface {
+    @Override
+    public boolean registerUser(UserDTO user) {
+        return true;
+    }
+
     @Override
     public boolean loginUser(UserDTO user) {
         String username = user.getUsername();
         String password = user.getPassword();
 
-        ArrayList<UserDTO> users = getUsers();
+        List<UserDTO> users = getUsers();
 
         for (UserDTO user_:users){
             if (username.equals(user_.getUsername())) {
@@ -23,11 +28,12 @@ public class UserDAOTest implements UserDAOInterface {
         return false;
     }
 
-    public ArrayList<UserDTO> getUsers( ){
-        ArrayList<UserDTO> users = new ArrayList<UserDTO>();
+    public List<UserDTO> getUsers( ){
+        List<UserDTO> users = new ArrayList<>();
         UserDTO user1 = new UserDTO("admin","admin");
         UserDTO user2 = new UserDTO("amc00300","12345678");
-        users.add(user1); users.add(user2);
+        UserDTO user3 = new UserDTO("adri","adri");
+        users.add(user1); users.add(user2); users.add(user3);
         return users;
     }
 }

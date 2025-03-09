@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+    <form action="register" method="post">
+        <label>Usuario</label>
+        <input type="text" name="username">
+
+        <label>Contraseña</label>
+        <input type="password" name="password">
+
+        <label>Repetir Contraseña</label>
+        <input type="password" name="r_password">
+
+        <input type="submit">
+    </form>
+    <span th:text="${e_message}"></span>
+</body>
+</html>

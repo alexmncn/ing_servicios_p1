@@ -2,10 +2,7 @@ package com.alexmncn.ing_servicios_p1;
 
 import com.alexmncn.ing_servicios_p1.daos.UserDAOInterface;
 import com.alexmncn.ing_servicios_p1.dtos.UserDTO;
-import com.alexmncn.ing_servicios_p1.dtos.User_;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -28,70 +24,37 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping(value = "/form")
-    public String formVG() {
-        return "form";
+    @GetMapping(value = "/register")
+    public String registerVG() {
+        return "register";
     }
 
-    @PostMapping(value = "/form")
-    public String formVP(
+    @PostMapping(value = "/register")
+    public String registerVP(
             Model model,
-            HttpServletRequest req,
-            HttpServletResponse res,
             @RequestParam("username") String username,
-            @RequestParam("email") String email,
-            @RequestParam("name") String name,
-            @RequestParam("last_name") String last_name
+            @RequestParam("password") String password,
+            @RequestParam("r_password") String r_password
     ) {
-        // New session
-        User_ user = new User_(username, email, name, last_name); // New user object
-        HttpSession session = req.getSession(); // Get or create new session
-        session.setAttribute("user", user); // Save user data in session
-
-        // Cookie perm.
-        Cookie c = new Cookie("user", user.getUsername());
-        c.setMaxAge(60*60); // 1 hour
-        c.setPath("/");
-        res.addCookie(c); // Add cookie to response
-
-        // Add param. values to model
-        model.addAttribute("username", username);
-        model.addAttribute("email", email);
-        model.addAttribute("name", name);
-        model.addAttribute("last_name", last_name);
-        return "user";
-    }
-
-    @GetMapping(value = "/userdata")
-    public String userDataVG(Model model, HttpServletRequest req) {
-        HttpSession session = req.getSession(false);
-
-        // Check if session exists
-        if (session != null) {
-            User_ user = (User_) session.getAttribute("user");
-
-            // Add param. values to model
-            model.addAttribute("username", user.getUsername());
-            model.addAttribute("email", user.getEmail());
-            model.addAttribute("name", user.getName());
-            model.addAttribute("last_name", user.getLastName());
+        // Check if passwords match
+        if(!password.equals(r_password)) {
+            model.addAttribute("e_message", "Las contraseñas no coinciden.");
+            return "register";
         }
 
-        // Check cookies
-        Cookie[] cookies = req.getCookies();
-        String cookieName = "user";
-        String cookieValue = "";
+        boolean registerStatus = false;
+        UserDTO user = new UserDTO(username, password);
 
-        // Get the value of cookie with name 'cookieName'
-        if (cookies != null) {
-            for (Cookie cookie:cookies) {
-                if (cookieName.equals(cookie.getName())) cookieValue = cookie.getValue();
-            }
+        // Save user
+        registerStatus = userDAO.registerUser(user);
+
+        // If register successful, redirect to login
+        if (registerStatus) {
+            return "login";
+        } else {
+            model.addAttribute("e_message", "Error en el registro. Inténtalo de nuevo.");
+            return "register";
         }
-
-        System.out.println(cookieName +": " + cookieValue);
-
-        return "user";
     }
 
     @GetMapping(value = "/login")
@@ -119,7 +82,7 @@ public class HomeController {
 
             // If admin user return admin panel view
             if (username.equals("admin")) {
-                ArrayList<UserDTO> users = userDAO.getUsers(); // Get all users
+                List<UserDTO> users = userDAO.getUsers(); // Get all users
 
                 model.addAttribute("users", users); // Add users to model
                 return "adminpanel";

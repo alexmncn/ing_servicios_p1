@@ -28,6 +28,7 @@ public class UserDAOTest implements UserDAOInterface {
         return false;
     }
 
+    @Override
     public List<UserDTO> getUsers( ){
         List<UserDTO> users = new ArrayList<>();
         UserDTO user1 = new UserDTO("admin","admin");
@@ -35,5 +36,11 @@ public class UserDAOTest implements UserDAOInterface {
         UserDTO user3 = new UserDTO("adri","adri");
         users.add(user1); users.add(user2); users.add(user3);
         return users;
+    }
+
+    @Override
+    public UserDTO getUserByUsername(String username) {
+        List<UserDTO> users = new ArrayList<>();
+        return new UserDTO("alex","alex");
     }
 }

@@ -80,8 +80,11 @@ public class HomeController {
             HttpSession session = req.getSession(); // Get or create new session
             session.setAttribute("username", user.getUsername()); // Save username in session
 
-            // If admin user return admin panel view
-            if (username.equals("admin")) {
+            // Get user role
+            String user_role = userDAO.getUserByUsername(username).getRole();
+
+            // If admin role return admin panel view
+            if (user_role.equals("admin")) {
                 List<UserDTO> users = userDAO.getUsers(); // Get all users
 
                 model.addAttribute("users", users); // Add users to model

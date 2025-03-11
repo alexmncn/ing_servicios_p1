@@ -10,4 +10,6 @@ public interface UserDAOInterface {
     public boolean loginUser(UserDTO user);
 
     public List<UserDTO> getUsers();
+
+    public UserDTO getUserByUsername(String username);
 }

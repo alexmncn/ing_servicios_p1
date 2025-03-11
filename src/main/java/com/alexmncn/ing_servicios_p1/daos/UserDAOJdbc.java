@@ -22,8 +22,10 @@ public class UserDAOJdbc implements UserDAOInterface {
 
     private final RowMapper<UserDTO> mapper = (rs, numRow) -> {
         UserDTO user = new UserDTO();
+        user.setId(rs.getInt("id"));
         user.setUsername(rs.getString("username"));
         user.setPassword(rs.getString("password"));
+        user.setRole(rs.getString("role"));
         return user;
     };
 
@@ -36,17 +38,10 @@ public class UserDAOJdbc implements UserDAOInterface {
 
     @Override
     public boolean loginUser(UserDTO user) {
-        String sql = "SELECT * FROM users WHERE username = ?";
-        List<UserDTO> users = this.jdbcTemplate.query(sql, mapper, user.getUsername());
+        UserDTO user_ = getUserByUsername(user.getUsername());
 
-        try {
-            UserDTO user_ = users.getFirst();
-
-            if (user_ != null) {
-                return user.getPassword().equals(user_.getPassword());
-            }
-        } catch (NoSuchElementException _) {
-
+        if (user_ != null) {
+            return user.getPassword().equals(user_.getPassword());
         }
 
         return false;
@@ -56,5 +51,21 @@ public class UserDAOJdbc implements UserDAOInterface {
     public List<UserDTO> getUsers() {
         String sql = "SELECT * FROM users";
         return this.jdbcTemplate.query(sql, mapper);
+    }
+
+    @Override
+    public UserDTO getUserByUsername(String username) {
+        String sql = "SELECT * FROM users WHERE username = ?";
+        List<UserDTO> users = this.jdbcTemplate.query(sql, mapper, username);
+
+        UserDTO user;
+
+        try {
+            user = users.getFirst();
+        } catch (NoSuchElementException _) {
+            return null;
+        }
+
+        return user;
     }
 }

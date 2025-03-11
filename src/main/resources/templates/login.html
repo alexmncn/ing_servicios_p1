@@ -3,17 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" href="/static/login.css">
 </head>
 <body>
-    <form action="login" method="post">
-        <label>Usuario</label>
-        <input type="text" name="username">
-
-        <label>Contraseña</label>
-        <input type="password" name="password">
-
-        <input type="submit">
-    </form>
-    <span th:text="${e_message}"></span>
+    <section>
+        <form action="login" method="post">
+            <div class="f-group">
+                <label>Usuario</label>
+                <input type="text" name="username" placeholder="Introduce tu usuario">
+            </div>
+            <div class="f-group">
+                <label>Contraseña</label>
+                <input type="password" name="password" placeholder="Introduce tu contraseña">
+            </div>
+            <div class="info">
+                <span th:text="message"></span>
+            </div>
+            <input type="submit" value="Iniciar sesión">
+        </form>
+        <div class="to-register">
+            <p>¿No tienes cuenta?</p>
+            <a href="/register">Regístrate</a>
+        </div>
+    </section>
 </body>
 </html>

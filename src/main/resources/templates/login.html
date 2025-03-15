@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="/static/login.css">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" href="/static/css/login.css">
 </head>
 <body>
     <section>
         <form action="login" method="post">
-            <div class="f-group">
+            <div class="f-group username">
                 <label>Usuario</label>
                 <input type="text" name="username" placeholder="Introduce tu usuario">
             </div>
-            <div class="f-group">
+            <div class="f-group password">
                 <label>Contraseña</label>
                 <input type="password" name="password" placeholder="Introduce tu contraseña">
             </div>
             <div class="info">
-                <span th:text="message"></span>
+                <span th:text="${e_message}"></span>
             </div>
             <input type="submit" value="Iniciar sesión">
         </form>

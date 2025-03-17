@@ -1,14 +1,12 @@
 package com.alexmncn.ing_servicios_p1.daos;
 
 import com.alexmncn.ing_servicios_p1.dtos.UserDTO;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 

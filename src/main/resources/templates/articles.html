@@ -1,125 +1,125 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-    /* Remove the navbar's default rounded borders and increase the bottom margin */
-    .navbar {
-      margin-bottom: 50px;
-      border-radius: 0;
-    }
+  <meta charset="UTF-8">
+  <title>Catálogo</title>
+  <link rel="stylesheet" th:href="@{/css/articles.css}">
+  <link rel="stylesheet" href="../static/css/articles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=chevron_left,chevron_right" />
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const featuredCarousel = document.querySelector(".featured-articles .articles-carousel");
+      const prevBtn = document.querySelector(".featured-articles .previous");
+      const nextBtn = document.querySelector(".featured-articles .next");
 
-    /* Remove the jumbotron's default bottom margin */
-     .jumbotron {
-      margin-bottom: 0;
-    }
+      nextBtn.addEventListener("click", () => {
+          featuredCarousel.scrollBy({ left: 275, behavior: "smooth" }); // Mueve a la derecha
+      });
 
-    /* Add a gray background color and some padding to the footer */
-    footer {
-      background-color: #f2f2f2;
-      padding: 25px;
-    }
-  </style>
+      prevBtn.addEventListener("click", () => {
+          featuredCarousel.scrollBy({ left: -275, behavior: "smooth" }); // Mueve a la izquierda
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const featuredCarousel = document.querySelector(".new-articles .articles-carousel");
+      const prevBtn = document.querySelector(".new-articles .previous");
+      const nextBtn = document.querySelector(".new-articles .next");
+
+      nextBtn.addEventListener("click", () => {
+          featuredCarousel.scrollBy({ left: 275, behavior: "smooth" }); // Mueve a la derecha
+      });
+
+      prevBtn.addEventListener("click", () => {
+          featuredCarousel.scrollBy({ left: -275, behavior: "smooth" }); // Mueve a la izquierda
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const user = document.getElementById("user");
+      const username = document.getElementById("username");
+      const logout = document.getElementById("logout");
+
+      user.addEventListener('mouseenter', function() {
+        username.classList.add("hide");
+        logout.classList.remove("hide");
+      });
+
+      user.addEventListener('mouseleave', function() {
+        username.classList.remove("hide");
+        logout.classList.add("hide");
+      });
+    });
+  </script>
 </head>
 <body>
-
-<div class="jumbotron">
-  <div class="container text-center">
-    <h1>Online Store</h1>
-    <p>Mission, Vission & Values</p>
-  </div>
-</div>
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Products</a></li>
-        <li><a href="#">Deals</a></li>
-        <li><a href="#">Stores</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/logout"><span class="glyphicon glyphicon-user"></span> <span th:text="${username}"></span></a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<div class="container">
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+  <header>
+    <section class="content">
+      <h1>Catálogo</h1>
+      <div id="user" class="user">
+        <p th:text="${username}" id="username"></p>
+        <a id="logout" class="hide" href="/logout">Cerrar sesión</a>
       </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="panel panel-danger">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="panel panel-success">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-      </div>
-    </div>
-  </div>
-</div><br>
+    </section>
+  </header>
+  <main>
+    <section class="featured-articles">
+      <h2>Destacados</h2>
+      <div class="articles">
+        <div class="button-container">
+          <div class="previous button">
+            <span class="material-symbols-outlined icon">chevron_left</span>
+          </div>
+        </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+        <div class="articles-carousel">
+          <div th:each="article : ${featured_articles}" class="article-card">
+            <img th:src="@{'https://tiendafleming.es/images/articles/' + ${article.codebar} + '.webp'}" alt="Imagen del artículo">
+            <div class="article-info">
+              <p th:text="${article.detalle}" class="detalle"></p>
+              <p th:text="'Ref: ' + ${article.ref}" class="ref"></p>
+              <p th:text="${article.pvp} + ' €'" class="pvp"></p>
+            </div>
+            <button class="buy-button">Comprar</button>
+          </div>
+        </div>
+        
+        <div class="button-container">
+          <div class="next button">
+            <span class="material-symbols-outlined icon">chevron_right</span>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-      </div>
-    </div>
-  </div>
-</div><br><br>
+    </section>
 
-<footer class="container-fluid text-center">
-  <p>Online Store Copyright</p>
-  <form class="form-inline">Get deals:
-    <input type="email" class="form-control" size="50" placeholder="Email Address">
-    <button type="button" class="btn btn-danger">Sign Up</button>
-  </form>
-</footer>
+    <section class="new-articles">
+      <h2>Novedades</h2>
+      <div class="articles">
+        <div class="button-container">
+          <div class="previous button">
+            <span class="material-symbols-outlined icon">chevron_left</span>
+          </div>
+        </div>
 
+        <div class="articles-carousel">
+          <div th:each="article : ${new_articles}" class="article-card">
+            <img th:src="@{'https://tiendafleming.es/images/articles/' + ${article.codebar} + '.webp'}" alt="Imagen del artículo">
+            <div class="article-info">
+              <p th:text="${article.detalle}" class="detalle"></p>
+              <p th:text="'Ref: ' + ${article.ref}" class="ref"></p>
+              <p th:text="${article.pvp} + ' €'" class="pvp"></p>
+            </div>
+            <button class="buy-button">Comprar</button>
+          </div>
+        </div>
+        
+        <div class="button-container">
+          <div class="next button">
+            <span class="material-symbols-outlined icon">chevron_right</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>

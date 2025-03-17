@@ -1,6 +1,8 @@
 package com.alexmncn.ing_servicios_p1;
 
+import com.alexmncn.ing_servicios_p1.daos.ArticleDAOInterface;
 import com.alexmncn.ing_servicios_p1.daos.UserDAOInterface;
+import com.alexmncn.ing_servicios_p1.dtos.ArticleDTO;
 import com.alexmncn.ing_servicios_p1.dtos.UserDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -17,6 +19,9 @@ import java.util.List;
 public class HomeController {
     @Autowired
     private UserDAOInterface userDAO;
+
+    @Autowired
+    private ArticleDAOInterface articleDAO;
 
 
     @GetMapping(value = "/")
@@ -87,11 +92,18 @@ public class HomeController {
             if (user_role.equals("admin")) {
                 List<UserDTO> users = userDAO.getUsers(); // Get all users
 
+                model.addAttribute("username", username);
                 model.addAttribute("users", users); // Add users to model
                 return "adminpanel";
             }
 
-            model.addAttribute("username", user.getUsername());
+            // Get articles
+            List<ArticleDTO> featuredArticles = articleDAO.getFeaturedArticles();
+            List<ArticleDTO> newArticles = articleDAO.getNewArticles();
+
+            model.addAttribute("username", username);
+            model.addAttribute("featured_articles", featuredArticles);
+            model.addAttribute("new_articles", newArticles);
             return "articles";
         } else {
             model.addAttribute("e_message", "Usuario no registrado");
@@ -129,7 +141,11 @@ public class HomeController {
         if (session != null) {
             username = session.getAttribute("username").toString();
 
+            // Get articles
+            List<ArticleDTO> featuredArticles = articleDAO.getFeaturedArticles();
+
             model.addAttribute("username", username);
+            model.addAttribute("featured_articles", featuredArticles);
             return "articles";
         } else {
             model.addAttribute("e_message", "Debes iniciar sesión para ver los artículos");
@@ -153,6 +169,7 @@ public class HomeController {
                 if (user_role.equals("admin")) {
                     List<UserDTO> users = userDAO.getUsers(); // Get all users
 
+                    model.addAttribute("username", username);
                     model.addAttribute("users", users); // Add users to model
                     return "adminpanel";
                 }

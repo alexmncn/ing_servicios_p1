@@ -5,12 +5,32 @@
   <title>Admin Panel</title>
   <link rel="stylesheet" th:href="@{/css/adminpanel.css}">
   <link rel="stylesheet" href="../static/css/adminpanel.css">
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const user = document.getElementById("user");
+      const username = document.getElementById("username");
+      const logout = document.getElementById("logout");
+
+      user.addEventListener('mouseenter', function() {
+        username.classList.add("hide");
+        logout.classList.remove("hide");
+      });
+
+      user.addEventListener('mouseleave', function() {
+        username.classList.remove("hide");
+        logout.classList.add("hide");
+      });
+    });
+  </script>
 </head>
 <body>
   <header>
     <section class="content">
       <h1>Panel Admin</h1>
-      <a href="/logout">Cerrar sesión</a>
+      <div id="user" class="user">
+        <p th:text="${username}" id="username"></p>
+        <a id="logout" class="hide" href="/logout">Cerrar sesión</a>
+      </div>
     </section>
   </header>
   <main>

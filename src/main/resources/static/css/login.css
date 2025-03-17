@@ -71,10 +71,11 @@ input[type="submit"]{
     color: white;
     font-weight: 700;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 input[type="submit"]:hover{
-    background-color: #8a46c5;
+    background-color: #6c4192;
 }
 
 .to-register{

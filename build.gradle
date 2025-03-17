@@ -27,6 +27,9 @@ dependencies {
 	implementation 'com.mysql:mysql-connector-j:9.2.0'
 	// JDBC API
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	// Web client
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
 }
 
 tasks.named('test') {

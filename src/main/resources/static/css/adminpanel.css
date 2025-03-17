@@ -29,7 +29,19 @@ header .content h1 {
     margin: 0;
 }
 
-header .content a{
+header .content .user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+header .content .user p {
+    font-weight: bold;
+    margin: 0;
+    padding: 0.5rem 1rem;
+}
+
+header .content .user a{
     color: white;
     text-decoration: none;
     padding: 0.5rem 1rem;
@@ -37,12 +49,12 @@ header .content a{
     transition: background-color 0.3s;
 }
 
-header .content a:hover{
+header .content .user a:hover{
     background-color: #404040;
 }
 
-header .content a:visited{
-    background-color: white;
+header .content .user a:visited{
+    color: white;
 }
 
 main{
@@ -95,4 +107,8 @@ section.users{
 
 .users tr:nth-child(even) {
     background-color: #f2f2f2;
+}
+
+.hide{
+    display: none;
 }

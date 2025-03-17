@@ -136,4 +136,30 @@ public class HomeController {
             return "login";
         }
     }
+
+    @GetMapping(value = "/adminpanel")
+    public String adminPanelVG(Model model, HttpServletRequest req) {
+        HttpSession session = req.getSession(false); // Get session
+        String user_role;
+
+        if (session != null) {
+            String username = session.getAttribute("username").toString();
+
+            if (username != null) {
+                // Get user role
+                user_role = userDAO.getUserByUsername(username).getRole();
+
+                // If admin role return admin panel view
+                if (user_role.equals("admin")) {
+                    List<UserDTO> users = userDAO.getUsers(); // Get all users
+
+                    model.addAttribute("users", users); // Add users to model
+                    return "adminpanel";
+                }
+            }
+        }
+
+        model.addAttribute("e_message", "No has iniciado sesión. Debes ser admin.");
+        return "login";
+    }
 }

@@ -1,84 +1,98 @@
 body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    height: 98vh;
-    display: flex;
-    position: relative;
-    justify-content: center;
-    align-items: center;
     background-color: #f6f6f6;
 }
 
-section{
-    width: 800px;
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100vw;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    background-color: #202020;
+    color: white;
+    padding: 1rem 0;
 }
 
-form{
-    width: 350px;
+header .content{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 2rem;
-    padding: 1.5rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    box-shadow: 0px 0px 5px 3px rgba(0,0,0, 0.1);
+    justify-content: space-between;
+    width: 85%;
+    margin: 0 auto;
+}
+
+header .content h1 {
+    margin: 0;
+}
+
+header .content a{
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+header .content a:hover{
+    background-color: #404040;
+}
+
+header .content a:visited{
     background-color: white;
 }
 
-.f-group{
-    width: 100%;
+main{
+    width: 800px;
+    margin: 4rem auto 0 auto;
+}
+
+@media (max-width: 800px){
+    main{
+        width: 100%;
+        margin: 4rem 0 0 0;
+    }   
+    
+}
+
+section.users{
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    padding: 1rem;
 }
 
-.f-group label{
-    font-size: 1.2rem;
-    font-weight: 600;
+.users h2{
+    font-size: 1.5rem;
+    color: #202020;
 }
 
-.f-group input{
-    font-family: inherit;
+.users table{
     width: 100%;
-    padding: 0.75rem;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-    box-sizing: border-box;
-    background-color: #f6f6f6;
+    border-collapse: collapse;
+    font-size: 1rem;
+    text-align: left;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-input:focus {
-    outline: none;
-    border-color: #904dd8;
-}
-
-input[type="submit"]{
-    width: 100%;
-    padding: 0.75rem;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
+.users th{
     background-color: #904dd8;
     color: white;
-    font-weight: 700;
-    cursor: pointer;
 }
 
-input[type="submit"]:hover{
-    background-color: #8a46c5;
+.users th, td{
+    padding: 0.5rem 1rem;
+    border-top: 1px solid #ddd;
 }
 
-.to-register{
-    display: flex;
-    align-items: center;
-    gap: 0.2rem;
-    font-size: 0.9rem;
+.users td{
+    color: #202020;
 }
 
-span{
-    position: absolute;
-    border-radius: 8px;
-    font-size: 0.9rem;
+.users tr:nth-child(even) {
+    background-color: #f2f2f2;
 }

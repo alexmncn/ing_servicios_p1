@@ -1,24 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Admin</title>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
   <link rel="stylesheet" th:href="@{/css/adminpanel.css}">
+  <link rel="stylesheet" href="../static/css/adminpanel.css">
 </head>
 <body>
-<h2>Usuarios</h2>
-<table>
-  <tr>
-    <th>Id</th>
-    <th>Username</th>
-    <th>Contraseña</th>
-    <th>Role</th>
-  </tr>
-  <tr th:each="user : ${users}">
-    <td th:text="${user.id}"></td>
-    <td th:text="${user.username}"></td>
-    <td th:text="${user.password}"></td>
-    <td th:text="${user.role}"></td>
-  </tr>
-</table>
+  <header>
+    <section class="content">
+      <h1>Panel Admin</h1>
+      <a href="/logout">Cerrar sesión</a>
+    </section>
+  </header>
+  <main>
+    <section class="users">
+      <h2>Usuarios</h2>
+      <table>
+        <tr>
+          <th>Id</th>
+          <th>Username</th>
+          <th>Contraseña</th>
+          <th>Role</th>
+        </tr>
+        <tr th:each="user : ${users}">
+          <td th:text="${user.id}"></td>
+          <td th:text="${user.username}"></td>
+          <td th:text="${user.password}"></td>
+          <td th:text="${user.role}"></td>
+        </tr>
+      </table>
+    </section>
+  </main>
 </body>
 </html>

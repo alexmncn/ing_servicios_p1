@@ -59,13 +59,13 @@ header .content .user a:visited{
 
 main{
     width: 1200px;
-    margin: 8rem auto 0 auto;
+    margin: 8rem auto;
 }
 
 @media (max-width: 1200px){
     main{
         width: 100%;
-        margin: 8rem 0 0 0;
+        margin: 8rem 0;
     }   
     
 }

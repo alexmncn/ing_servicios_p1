@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class HomeController {
 
     @GetMapping(value = "/")
     public String homeV(){
-        return "home";
+        return "redirect:/articles";
     }
 
     @GetMapping(value = "/register")
@@ -55,7 +56,7 @@ public class HomeController {
 
         // If register successful, redirect to login
         if (registerStatus) {
-            return "login";
+            return "/login";
         } else {
             model.addAttribute("e_message", "Error en el registro. Inténtalo de nuevo.");
             return "register";
@@ -70,6 +71,7 @@ public class HomeController {
     @PostMapping(value = "/login")
     public String loginVP(
             Model model,
+            RedirectAttributes redirectAttributes,
             HttpServletRequest req,
             @RequestParam("username") String username,
             @RequestParam("password") String password
@@ -90,21 +92,10 @@ public class HomeController {
 
             // If admin role return admin panel view
             if (user_role.equals("admin")) {
-                List<UserDTO> users = userDAO.getUsers(); // Get all users
-
-                model.addAttribute("username", username);
-                model.addAttribute("users", users); // Add users to model
-                return "adminpanel";
+                return "redirect:/adminpanel";
             }
 
-            // Get articles
-            List<ArticleDTO> featuredArticles = articleDAO.getFeaturedArticles();
-            List<ArticleDTO> newArticles = articleDAO.getNewArticles();
-
-            model.addAttribute("username", username);
-            model.addAttribute("featured_articles", featuredArticles);
-            model.addAttribute("new_articles", newArticles);
-            return "articles";
+            return "redirect:/articles";
         } else {
             model.addAttribute("e_message", "Usuario no registrado");
             return "login";
@@ -113,7 +104,7 @@ public class HomeController {
 
     @GetMapping(value = "/logout")
     public String logoutVG(
-            Model model,
+            RedirectAttributes redirectAttributes,
             HttpServletRequest req
     ) {
         // Get session if exists
@@ -121,17 +112,18 @@ public class HomeController {
 
         if (session != null) {
             session.invalidate(); // Delete session
-            model.addAttribute("e_message", "Has cerrado sesión.");
+            redirectAttributes.addFlashAttribute("e_message", "Has cerrado sesión.");
         } else {
-            model.addAttribute("e_message", "No había una sesión activa.");
+            redirectAttributes.addFlashAttribute("e_message", "No había una sesión activa.");
         }
 
-        return "login";
+        return "redirect:/login";
     }
 
     @GetMapping(value = "/articles")
     public String articlesVG(
             Model model,
+            RedirectAttributes redirectAttributes,
             HttpServletRequest req
     ) {
         String username;
@@ -143,18 +135,24 @@ public class HomeController {
 
             // Get articles
             List<ArticleDTO> featuredArticles = articleDAO.getFeaturedArticles();
+            List<ArticleDTO> newArticles = articleDAO.getNewArticles();
 
             model.addAttribute("username", username);
             model.addAttribute("featured_articles", featuredArticles);
+            model.addAttribute("new_articles", newArticles);
             return "articles";
         } else {
-            model.addAttribute("e_message", "Debes iniciar sesión para ver los artículos");
-            return "login";
+            redirectAttributes.addFlashAttribute("e_message", "Debes iniciar sesión para ver los artículos");
+            return "redirect:/login";
         }
     }
 
     @GetMapping(value = "/adminpanel")
-    public String adminPanelVG(Model model, HttpServletRequest req) {
+    public String adminPanelVG(
+            Model model,
+            HttpServletRequest req,
+            RedirectAttributes redirectAttributes
+    ) {
         HttpSession session = req.getSession(false); // Get session
         String user_role;
 
@@ -176,7 +174,7 @@ public class HomeController {
             }
         }
 
-        model.addAttribute("e_message", "No has iniciado sesión. Debes ser admin.");
-        return "login";
+        redirectAttributes.addFlashAttribute("e_message", "No has iniciado sesión. Debes ser admin.");
+        return "redirect:/login";
     }
 }

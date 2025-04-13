@@ -6,14 +6,53 @@
   <link rel="stylesheet" th:href="@{/css/articles.css}">
   <link rel="stylesheet" href="../static/css/articles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=chevron_left,chevron_right" />
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const featuredCarousel = document.querySelector(".featured-articles .articles-carousel");
+      const prevBtn = document.querySelector(".featured-articles .previous");
+      const nextBtn = document.querySelector(".featured-articles .next");
+
+      nextBtn.addEventListener("click", () => {
+          featuredCarousel.scrollBy({ left: 275, behavior: "smooth" }); // Mueve a la derecha
+      });
+
+      prevBtn.addEventListener("click", () => {
+          featuredCarousel.scrollBy({ left: -275, behavior: "smooth" }); // Mueve a la izquierda
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const featuredCarousel = document.querySelector(".new-articles .articles-carousel");
+      const prevBtn = document.querySelector(".new-articles .previous");
+      const nextBtn = document.querySelector(".new-articles .next");
+
+      nextBtn.addEventListener("click", () => {
+          featuredCarousel.scrollBy({ left: 275, behavior: "smooth" }); // Mueve a la derecha
+      });
+
+      prevBtn.addEventListener("click", () => {
+          featuredCarousel.scrollBy({ left: -275, behavior: "smooth" }); // Mueve a la izquierda
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const user = document.getElementById("user");
+      const username = document.getElementById("username");
+      const logout = document.getElementById("logout");
+
+      user.addEventListener('mouseenter', function() {
+        username.classList.add("hide");
+        logout.classList.remove("hide");
+      });
+
+      user.addEventListener('mouseleave', function() {
+        username.classList.remove("hide");
+        logout.classList.add("hide");
+      });
+    });
+  </script>
 </head>
 <body>
-  <script th:src="@{/js/articles.js}"></script>
-  <script src="../static/js/articles.js"></script>
-  <!-- Initialize the JS-SDK -->
-
-  <script src="https://www.paypal.com/sdk/js?client-id=AThz6JYFmoTLESNmv897c8VGWjnxLid_Cqz9DujKFE2qcC6cbAlsXGS734YcAm9Y0NIYHp4OM_11NOv6&buyer-country=GB&currency=EUR&components=buttons&disable-funding=venmo,paylater,card" data-sdk-integration-source="developer-studio"></script>
-
   <header>
     <section class="content">
       <h1>Catálogo</h1>
@@ -41,10 +80,7 @@
               <p th:text="'Ref: ' + ${article.ref}" class="ref"></p>
               <p th:text="${article.pvp} + ' €'" class="pvp"></p>
             </div>
-            
-            <div id="paypal-button-container"></div>
-            <p id="result-message"></p>
-
+            <button class="buy-button">Comprar</button>
           </div>
         </div>
         

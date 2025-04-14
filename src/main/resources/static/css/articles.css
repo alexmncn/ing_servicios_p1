@@ -101,6 +101,7 @@ section h2{
 
 .articles .button:hover{
     background-color: #f0f0f0;
+    border: 1px solid #e0e0e0;
 }
 
 .articles .button .icon {
@@ -134,6 +135,7 @@ section h2{
     padding: 0.75rem;
     gap: 1rem;
     border-radius: 10px;
+    border: 1px solid #e0e0e0;
     background: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -182,6 +184,7 @@ section h2{
     color: white;
     font-family: inherit;
     font-weight: 700;
+    font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s;
 }

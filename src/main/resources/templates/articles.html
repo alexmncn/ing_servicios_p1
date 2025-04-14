@@ -73,17 +73,108 @@
         </div>
 
         <div class="articles-carousel">
-          <div th:each="article : ${featured_articles}" class="article-card">
-            <img th:src="@{'https://tiendafleming.es/images/articles/' + ${article.codebar} + '.webp'}" alt="Imagen del artículo">
+          <div class="article-card">
+            <img src="https://tiendafleming.es/images/articles/55.webp" alt="Imagen del artículo">
             <div class="article-info">
-              <p th:text="${article.detalle}" class="detalle"></p>
-              <p th:text="'Ref: ' + ${article.ref}" class="ref"></p>
-              <p th:text="${article.pvp} + ' €'" class="pvp"></p>
+              <p class="detalle">ENCENDEDOR CLIPPER</p>
+              <p class="ref">Ref: 55</p>
+              <p class="pvp">1.1 €</p>
             </div>
-            <button class="buy-button">Comprar</button>
+
+            <form action="https://www.sandbox.paypal.com/ncp/payment/TKCBQZ7X8TZJW" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.2rem;">
+              <input class="buy-button" type="submit" value="Comprar ahora" />
+            </form>
+          </div>
+          <div class="article-card">
+            <img src="https://tiendafleming.es/images/articles/127.webp" alt="Imagen del artículo">
+            <div class="article-info">
+              <p class="detalle">CEPILLO PELO</p>
+              <p class="ref">Ref: 127</p>
+              <p class="pvp">2.0 €</p>
+            </div>
+            <form action="https://www.sandbox.paypal.com/ncp/payment/6K5DMZFPHJ32W" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.2rem;">
+              <input class="buy-button" type="submit" value="Comprar ahora" />
+            </form>
+          </div>
+          <div class="article-card">
+            <img src="https://tiendafleming.es/images/articles/420.webp" alt="Imagen del artículo">
+            <div class="article-info">
+              <p class="detalle">AGUILA 1L</p>
+              <p class="ref">Ref: 420</p>
+              <p class="pvp">1.6 €</p>
+            </div>
+            <form action="https://www.sandbox.paypal.com/ncp/payment/V58G6AYBY4V86" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.2rem;">
+              <input class="buy-button" type="submit" value="Comprar ahora" />
+            </form>
+          </div>
+          <div class="article-card">
+            <img src="https://tiendafleming.es/images/articles/40052403.webp" alt="Imagen del artículo">
+            <div class="article-info">
+              <p class="detalle">KIT KAT</p>
+              <p class="ref">Ref: 2403</p>
+              <p class="pvp">1 €</p>
+            </div>
+            <form action="https://www.sandbox.paypal.com/ncp/payment/LY24UD4L6PQ6Q" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.2rem;">
+              <input class="buy-button" type="submit" value="Comprar ahora" />
+            </form>
+          </div>
+          <div class="article-card">
+            <img src="https://tiendafleming.es/images/articles/40084107.webp" alt="Imagen del artículo">
+            <div class="article-info">
+              <p class="detalle">HUEVO KINDER</p>
+              <p class="ref">Ref: 4107</p>
+              <p class="pvp">1.4 €</p>
+            </div>
+            <form action="https://www.sandbox.paypal.com/ncp/payment/2TT9Z4RMRA3WN" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.2rem;">
+              <input class="buy-button" type="submit" value="Comprar ahora" />
+            </form>
+          </div>
+          <div class="article-card">
+            <img src="https://tiendafleming.es/images/articles/80310891.webp" alt="Imagen del artículo">
+            <div class="article-info">
+              <p class="detalle">KINDER JOY</p>
+              <p class="ref">Ref: 891</p>
+              <p class="pvp">1.5 €</p>
+            </div>
+            <form action="https://www.sandbox.paypal.com/ncp/payment/6KDJL5JGEE29C" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.2rem;">
+              <input class="buy-button" type="submit" value="Comprar ahora" />
+            </form>
+          </div>
+          <div class="article-card">
+            <img src="https://tiendafleming.es/images/articles/5000281030838.webp" alt="Imagen del artículo">
+            <div class="article-info">
+              <p class="detalle">RON CACIQUE</p>
+              <p class="ref">Ref: 11060</p>
+              <p class="pvp">13.8 €</p>
+            </div>
+            <form action="https://www.sandbox.paypal.com/ncp/payment/Q5KG454MZ4ER4" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.2rem;">
+              <input class="buy-button" type="submit" value="Comprar ahora" />
+            </form>
+          </div>
+          <div class="article-card">
+            <img src="https://tiendafleming.es/images/articles/5000299605042.webp" alt="Imagen del artículo">
+            <div class="article-info">
+              <p class="detalle">GINEBRA BEEFEATER</p>
+              <p class="ref">Ref: 605042</p>
+              <p class="pvp">14.7 €</p>
+            </div>
+            <form action="https://www.sandbox.paypal.com/ncp/payment/YZQLRZ9E76DQC" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.2rem;">
+              <input class="buy-button" type="submit" value="Comprar ahora" />
+            </form>
+          </div>
+          <div class="article-card">
+            <img src="https://tiendafleming.es/images/articles/8410024700015.webp" alt="Imagen del artículo">
+            <div class="article-info">
+              <p class="detalle">MALIBÚ</p>
+              <p class="ref">Ref: 700015</p>
+              <p class="pvp">12.8 €</p>
+            </div>
+            <form action="https://www.sandbox.paypal.com/ncp/payment/F9PPRRDQPJ22E" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.2rem;">
+              <input class="buy-button" type="submit" value="Comprar ahora" />
+            </form>
           </div>
         </div>
-        
+
         <div class="button-container">
           <div class="next button">
             <span class="material-symbols-outlined icon">chevron_right</span>
@@ -102,17 +193,97 @@
         </div>
 
         <div class="articles-carousel">
-          <div th:each="article : ${new_articles}" class="article-card">
-            <img th:src="@{'https://tiendafleming.es/images/articles/' + ${article.codebar} + '.webp'}" alt="Imagen del artículo">
+          <div class="article-card">
+            <img src="https://tiendafleming.es/images/articles/8410376046939.webp" alt="Imagen del artículo">
             <div class="article-info">
-              <p th:text="${article.detalle}" class="detalle"></p>
-              <p th:text="'Ref: ' + ${article.ref}" class="ref"></p>
-              <p th:text="${article.pvp} + ' €'" class="pvp"></p>
+              <p class="detalle">GALLETAS TWIN GO GULLON 1.50</p>
+              <p class="ref">Ref: 46939</p>
+              <p class="pvp">1.5 €</p>
             </div>
-            <button class="buy-button">Comprar</button>
+            <form action="https://www.sandbox.paypal.com/ncp/payment/YEJKA8ZAQTDLY" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.2rem;">
+              <input class="buy-button" type="submit" value="Comprar ahora" />
+            </form>
+          </div>
+          <div class="article-card">
+            <img src="https://tiendafleming.es/images/articles/8410728180120.webp" alt="Imagen del artículo">
+            <div class="article-info">
+              <p class="detalle">AGUA LANJARON 1'5L</p>
+              <p class="ref">Ref: 180120</p>
+              <p class="pvp">1 €</p>
+            </div>
+            <form action="https://www.sandbox.paypal.com/ncp/payment/HRUR5Y77LHP7C" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.2rem;">
+              <input class="buy-button" type="submit" value="Comprar ahora" />
+            </form>
+          </div>
+          <div class="article-card">
+            <img src="https://tiendafleming.es/images/articles/8411878199307.webp" alt="Imagen del artículo">
+            <div class="article-info">
+              <p class="detalle">AGUA FUERTE KIRIKO 1'5L</p>
+              <p class="ref">Ref: 199307</p>
+              <p class="pvp">1.3 €</p>
+            </div>
+            <form action="https://www.sandbox.paypal.com/ncp/payment/GJJ9GAMBKZVTS" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.2rem;">
+              <input class="buy-button" type="submit" value="Comprar ahora" />
+            </form>
+          </div>
+          <div class="article-card">
+            <img src="https://tiendafleming.es/images/articles/8411878202199.webp" alt="Imagen del artículo">
+            <div class="article-info">
+              <p class="detalle">AGUA DESTILADA KIRKO 5 LITROS</p>
+              <p class="ref">Ref: 202199</p>
+              <p class="pvp">1.8 €</p>
+            </div>
+            <form action="https://www.sandbox.paypal.com/ncp/payment/DYNRZSZXXQZEC" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.2rem;">
+              <input class="buy-button" type="submit" value="Comprar ahora" />
+            </form>
+          </div>
+          <div class="article-card">
+            <img src="https://tiendafleming.es/images/articles/8411547001061.webp" alt="Imagen del artículo">
+            <div class="article-info">
+              <p class="detalle">AGUA SOLAN DE CABRAS 500ml</p>
+              <p class="ref">Ref: 106</p>
+              <p class="pvp">1 €</p>
+            </div>
+            <form action="https://www.sandbox.paypal.com/ncp/payment/RW9Y7VN8SDQT2" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.2rem;">
+              <input class="buy-button" type="submit" value="Comprar ahora" />
+            </form>
+          </div>
+          <div class="article-card">
+            <img src="https://tiendafleming.es/images/articles/190.webp" alt="Imagen del artículo">
+            <div class="article-info">
+              <p class="detalle">MUERDAGO</p>
+              <p class="ref">Ref: 190</p>
+              <p class="pvp">3.25 €</p>
+            </div>
+            <form action="https://www.sandbox.paypal.com/ncp/payment/Q7YC34SVDGG8E" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.2rem;">
+              <input class="buy-button" type="submit" value="Comprar ahora" />
+            </form>
+          </div>
+          <div class="article-card">
+            <img src="https://tiendafleming.es/images/articles/8410300353058.webp" alt="Imagen del artículo">
+            <div class="article-info">
+              <p class="detalle">AVECREN POLLO 8+2 pastillas</p>
+              <p class="ref">Ref: 353058</p>
+              <p class="pvp">1.25 €</p>
+            </div>
+            <form action="https://www.sandbox.paypal.com/ncp/payment/DGUG3EM42UWN6" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.2rem;">
+              <input class="buy-button" type="submit" value="Comprar ahora" />
+            </form>
+          </div>
+          <div class="article-card">
+            <img src="https://tiendafleming.es/images/articles/8412666562006.webp" alt="Imagen del artículo">
+            <div class="article-info">
+              <p class="detalle">PIM. NEGRA MOLIDA</p>
+              <p class="ref">Ref: 562006</p>
+              <p class="pvp">1 €</p>
+            </div>
+            <form action="https://www.sandbox.paypal.com/ncp/payment/48DG6GP4CCYVA" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.2rem;">
+              <input class="buy-button" type="submit" value="Comprar ahora" />
+            </form>
           </div>
         </div>
-        
+
+
         <div class="button-container">
           <div class="next button">
             <span class="material-symbols-outlined icon">chevron_right</span>

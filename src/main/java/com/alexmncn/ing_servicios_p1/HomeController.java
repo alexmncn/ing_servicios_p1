@@ -11,12 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("/amc00300")
 public class HomeController {
     @Autowired
     private UserDAOInterface userDAO;
@@ -27,7 +29,7 @@ public class HomeController {
 
     @GetMapping(value = "/")
     public String homeV(){
-        return "redirect:/articles";
+        return "redirect:/amc00300/articles";
     }
 
     @GetMapping(value = "/register")
@@ -56,7 +58,7 @@ public class HomeController {
 
         // If register successful, redirect to login
         if (registerStatus) {
-            return "/login";
+            return "/amc00300/login";
         } else {
             model.addAttribute("e_message", "Error en el registro. Inténtalo de nuevo.");
             return "register";
@@ -92,10 +94,10 @@ public class HomeController {
 
             // If admin role return admin panel view
             if (user_role.equals("admin")) {
-                return "redirect:/adminpanel";
+                return "redirect:/amc00300/adminpanel";
             }
 
-            return "redirect:/articles";
+            return "redirect:/amc00300/articles";
         } else {
             model.addAttribute("e_message", "Usuario no registrado");
             return "login";
@@ -117,7 +119,7 @@ public class HomeController {
             redirectAttributes.addFlashAttribute("e_message", "No había una sesión activa.");
         }
 
-        return "redirect:/login";
+        return "redirect:/amc00300/login";
     }
 
     @GetMapping(value = "/articles")
@@ -143,7 +145,7 @@ public class HomeController {
             return "articles";
         } else {
             redirectAttributes.addFlashAttribute("e_message", "Debes iniciar sesión para ver los artículos");
-            return "redirect:/login";
+            return "redirect:/amc00300/login";
         }
     }
 
@@ -175,6 +177,6 @@ public class HomeController {
         }
 
         redirectAttributes.addFlashAttribute("e_message", "No has iniciado sesión. Debes ser admin.");
-        return "redirect:/login";
+        return "redirect:/amc00300/login";
     }
 }
